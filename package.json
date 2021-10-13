@@ -1,0 +1,29 @@
+{
+  "name": "catalisa-nodejs",
+  "version": "1.0.0",
+  "description": "Projeto de exemplo do Catalisa",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/edvaldoszy/catalisa-nodejs.git"
+  },
+  "keywords": [
+    "catalisa",
+    "node"
+  ],
+  "author": "Edvaldo Szymonek",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/edvaldoszy/catalisa-nodejs/issues"
+  },
+  "homepage": "https://github.com/edvaldoszy/catalisa-nodejs#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.13"
+  }
+}
