@@ -10,7 +10,7 @@ const knex = createKnex({
 const bookshelf = require('bookshelf')(knex);
 
 const Tarefa = bookshelf.model('Tarefa', {
-  tableName: 'tarefas'
+  tableName: 'tarefas',
 });
 
 exports.Tarefa = Tarefa;
