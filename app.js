@@ -1,6 +1,8 @@
 const express = require('express');
 const modelos = require('./modelos');
 const parser = require('body-parser');
+const Joi = require('joi');
+const jwt = require('jsonwebtoken')
 
 const app = express();
 app.use(parser.json());
@@ -14,6 +16,21 @@ function validacao(request, response, next) {
     response.status(400).json(resultado.error);
   } else {
     next();
+  }
+}
+
+function autenticacao(req, res, next) {
+  const token = req.headers.token;
+  const secret = 'catalisa';
+  const payload = jwt.verify(token, secret);
+
+  if (payload) {
+    req.usuario = payload;
+    next();
+  } else {
+    res.status(401).json({
+      mensagem: 'Você não tem autorização para acessar esta página'
+    });
   }
 }
 
@@ -38,14 +55,14 @@ app.get('/tarefas', (request, response) => {
     });
 });
 
-app.post('/tarefas', validacao, (req, res) => {
+app.post('/tarefas', validacao, autenticacao, (req, res) => {
   const tarefa = new modelos.Tarefa({
     titulo: req.body.titulo,
   });
 
   tarefa.save()
     .then(() => {
-      res.send('A criação da tarefa funcionou');
+      res.send('A criação da tarefa funcionou, ' + req.usuario.nome);
     });
 });
 
